@@ -1,19 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import nltk
-
-
-# In[5]:
-
-
-nltk.word_tokenize('ASD SFKE_JNK, LKKkjnkKJN fef')
-
-
-# In[7]:
 
 
 docs = ["Iran's most powerful military figure was regarded as the strategic mastermind behind its vast ambition in the Middle East and the country's real foreign minister when it came to matters of war and peace.",
@@ -22,9 +7,6 @@ docs = ["Iran's most powerful military figure was regarded as the strategic mast
         "He was widely considered the architect of President Bashar al-Assad's war in Syria, the ongoing conflict in Iraq, the fight against Islamic State, and many battles beyond.",
         "The silver-haired general with a close-cropped beard was a cult hero for his fighters and the face of evil for his foes.",
         "For years, US officials considered killing a cunning adversary who ordered attacks on their forces and taunted them with social media barbs. "]
-
-
-# In[55]:
 
 
 def proximity_search(document_raw, t1, t2, n=5, ordered= False):
@@ -46,9 +28,6 @@ def proximity_search(document_raw, t1, t2, n=5, ordered= False):
     
 
 
-# In[55]:
-
-
 def stats(document_raw, t1, t2, n=5, ordered= False):
     sentences_raw = nltk.sent_tokenize(document_raw)
     sentences = [sentence.lower().strip() for sentence in sentences_raw]
@@ -68,28 +47,4 @@ def stats(document_raw, t1, t2, n=5, ordered= False):
                     print(document_raw)
     
 
-
-# In[ ]:
-
-
-# how many pair per sentence
-# how many good sent per document
-
-
-# In[56]:
-
-
 proximity_search(docs[0], 'figure', 'iran', n=5, ordered=False)
-
-
-# In[57]:
-
-
-'aa bb vv'.count('ss')
-
-
-# In[ ]:
-
-
-
-
