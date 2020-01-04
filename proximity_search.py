@@ -51,3 +51,5 @@ def stats(document_raw, t1, t2, n=5, ordered= False):
     
 
 proximity_search(docs[0], 'figure', 'iran', n=5, ordered=False)
+# like and is modes
+# condition: existing in the San s or p
