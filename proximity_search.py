@@ -10,6 +10,8 @@ docs = ["Iran's most powerful military figure was regarded as the strategic mast
 
 
 def proximity_search(document_raw, t1, t2, n=5, ordered= False):
+    """prints out the given document if it has both t1 and t2 inside,
+    with a distance no more than n"""
     sentences_raw = nltk.sent_tokenize(document_raw)
     sentences = [sentence.lower().strip() for sentence in sentences_raw]
     t1_norm = t1.lower().strip()
@@ -36,6 +38,7 @@ def stats(document_raw, t1, t2, n=5, ordered= False):
     for sentence in sentences:
         c_t1 = sentence.count(t1_normrm)
         c_t2 = sentence.count(t2_normrm)
+        pair_rate = c_t1 * c_t2
         sent_tok = nltk.word_tokenize(sentence)
         if t1_norm in sent_tok and t2_norm in sent_tok:
             diff = sent_tok.index(t2_norm) - sent_tok.index(t1_norm)
