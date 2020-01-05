@@ -9,7 +9,7 @@ docs = ["Iran's most powerful military figure was regarded as the strategic mast
         "For years, US officials considered killing a cunning adversary who ordered attacks on their forces and taunted them with social media barbs. "]
 
 
-def proximity_search(document_raw, t1, t2, n=5, ordered= False):
+def proximity_search(document_raw, t1, t2, n=5, ordered= False, kind='fuzzy'):
     """prints out the given document if it has both t1 and t2 inside,
     with a distance no more than n"""
     sentences_raw = nltk.sent_tokenize(document_raw)
@@ -19,14 +19,27 @@ def proximity_search(document_raw, t1, t2, n=5, ordered= False):
     for sentence in sentences:
         
         sent_tok = nltk.word_tokenize(sentence)
-        if t1_norm in sent_tok and t2_norm in sent_tok:
-            diff = sent_tok.index(t2_norm) - sent_tok.index(t1_norm)
-            if ordered:
-                if diff - 1 <= n and diff-1 > 0:
-                    print(document_raw)
-            else:
-                if abs(diff) - 1 <= n:
-                    print(document_raw)
+        if kind == 'exact':
+            if t1_norm in sent_tok and t2_norm in sent_tok:
+                diff = sent_tok.index(t2_norm) - sent_tok.index(t1_norm)
+                if ordered:
+                    if diff - 1 <= n and diff-1 > 0:
+                        print(document_raw)
+                else:
+                    if abs(diff) - 1 <= n:
+                        print(document_raw)
+        elif kind == 'fuzzy': # should be completed
+            if any(t1_norm in tok for tok in sent_tok) and any(t2_norm in tok for tok in sent_tok):
+                print(f't1_norm : {t1_norm}')
+                print(f't2_norm : {t2_norm}')
+                diff = sent_tok.index(t2_norm) - sent_tok.index(t1_norm)
+                if ordered:
+                    if diff - 1 <= n and diff-1 > 0:
+                        print(document_raw)
+                else:
+                    if abs(diff) - 1 <= n:
+                        print(document_raw)
+
     
 
 
@@ -50,6 +63,6 @@ def stats(document_raw, t1, t2, n=5, ordered= False):
                     print(document_raw)
     
 
-proximity_search(docs[0], 'figure', 'iran', n=5, ordered=False)
+proximity_search(docs[0], 'figure', 'ira', n=5, ordered=False)
 # like and is modes
 # condition: existing in the San s or p
